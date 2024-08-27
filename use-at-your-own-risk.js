@@ -152,13 +152,13 @@
 	    this.fun.apply(null, this.array);
 	};
 	var title = 'browser';
-	var platform$1 = 'browser';
+	var platform = 'browser';
 	var browser$1 = true;
 	var env = {};
 	var argv = [];
 	var version = ''; // empty string to avoid regexp issues
 	var versions = {};
-	var release$1 = {};
+	var release = {};
 	var config = {};
 
 	function noop() {}
@@ -208,7 +208,7 @@
 	}
 
 	var startTime = new Date();
-	function uptime$1() {
+	function uptime() {
 	  var currentTime = new Date();
 	  var dif = currentTime - startTime;
 	  return dif / 1000;
@@ -234,10 +234,10 @@
 	  chdir: chdir,
 	  umask: umask,
 	  hrtime: hrtime,
-	  platform: platform$1,
-	  release: release$1,
+	  platform: platform,
+	  release: release,
 	  config: config,
-	  uptime: uptime$1
+	  uptime: uptime
 	};
 
 	var src = {exports: {}};
@@ -1005,7 +1005,7 @@
 		isatty: isatty
 	});
 
-	var require$$0$1 = /*@__PURE__*/getDefaultExportFromNamespaceIfPresent(_polyfillNode_tty$1);
+	var require$$0 = /*@__PURE__*/getDefaultExportFromNamespaceIfPresent(_polyfillNode_tty$1);
 
 	var lookup = [];
 	var revLookup = [];
@@ -3712,323 +3712,13 @@
 
 	var require$$1 = /*@__PURE__*/getDefaultExportFromNamespaceIfPresent(_polyfillNode_util$1);
 
-	/*
-	The MIT License (MIT)
-
-	Copyright (c) 2016 CoderPuppy
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in all
-	copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	SOFTWARE.
-
-	*/
-	var _endianness;
-	function endianness() {
-	  if (typeof _endianness === 'undefined') {
-	    var a = new ArrayBuffer(2);
-	    var b = new Uint8Array(a);
-	    var c = new Uint16Array(a);
-	    b[0] = 1;
-	    b[1] = 2;
-	    if (c[0] === 258) {
-	      _endianness = 'BE';
-	    } else if (c[0] === 513){
-	      _endianness = 'LE';
-	    } else {
-	      throw new Error('unable to figure out endianess');
-	    }
-	  }
-	  return _endianness;
-	}
-
-	function hostname() {
-	  if (typeof global$1.location !== 'undefined') {
-	    return global$1.location.hostname
-	  } else return '';
-	}
-
-	function loadavg() {
-	  return [];
-	}
-
-	function uptime() {
-	  return 0;
-	}
-
-	function freemem() {
-	  return Number.MAX_VALUE;
-	}
-
-	function totalmem() {
-	  return Number.MAX_VALUE;
-	}
-
-	function cpus() {
-	  return [];
-	}
-
-	function type() {
-	  return 'Browser';
-	}
-
-	function release () {
-	  if (typeof global$1.navigator !== 'undefined') {
-	    return global$1.navigator.appVersion;
-	  }
-	  return '';
-	}
-
-	function networkInterfaces () {
-	  return {};
-	}
-
-	function getNetworkInterfaces () {
-	  return {};
-	}
-
-	function arch() {
-	  return 'javascript';
-	}
-
-	function platform() {
-	  return 'browser';
-	}
-
-	function tmpDir() {
-	  return '/tmp';
-	}
-	var tmpdir = tmpDir;
-
-	var EOL = '\n';
-
-	function homedir(){
-	  return '$HOME'
-	}
-
-	var _polyfillNode_os = {
-	  homedir: homedir,
-	  EOL: EOL,
-	  arch: arch,
-	  platform: platform,
-	  tmpdir: tmpdir,
-	  tmpDir: tmpDir,
-	  networkInterfaces:networkInterfaces,
-	  getNetworkInterfaces: getNetworkInterfaces,
-	  release: release,
-	  type: type,
-	  cpus: cpus,
-	  totalmem: totalmem,
-	  freemem: freemem,
-	  uptime: uptime,
-	  loadavg: loadavg,
-	  hostname: hostname,
-	  endianness: endianness,
-	};
-
-	var _polyfillNode_os$1 = /*#__PURE__*/Object.freeze({
-		__proto__: null,
-		EOL: EOL,
-		arch: arch,
-		cpus: cpus,
-		default: _polyfillNode_os,
-		endianness: endianness,
-		freemem: freemem,
-		getNetworkInterfaces: getNetworkInterfaces,
-		homedir: homedir,
-		hostname: hostname,
-		loadavg: loadavg,
-		networkInterfaces: networkInterfaces,
-		platform: platform,
-		release: release,
-		tmpDir: tmpDir,
-		tmpdir: tmpdir,
-		totalmem: totalmem,
-		type: type,
-		uptime: uptime
-	});
-
-	var require$$0 = /*@__PURE__*/getDefaultExportFromNamespaceIfPresent(_polyfillNode_os$1);
-
-	var hasFlag;
-	var hasRequiredHasFlag;
-
-	function requireHasFlag () {
-		if (hasRequiredHasFlag) return hasFlag;
-		hasRequiredHasFlag = 1;
-
-		hasFlag = (flag, argv = browser$1$1.argv) => {
-			const prefix = flag.startsWith('-') ? '' : (flag.length === 1 ? '-' : '--');
-			const position = argv.indexOf(prefix + flag);
-			const terminatorPosition = argv.indexOf('--');
-			return position !== -1 && (terminatorPosition === -1 || position < terminatorPosition);
-		};
-		return hasFlag;
-	}
-
-	var supportsColor_1;
-	var hasRequiredSupportsColor;
-
-	function requireSupportsColor () {
-		if (hasRequiredSupportsColor) return supportsColor_1;
-		hasRequiredSupportsColor = 1;
-		const os = require$$0;
-		const tty = require$$0$1;
-		const hasFlag = requireHasFlag();
-
-		const {env} = browser$1$1;
-
-		let forceColor;
-		if (hasFlag('no-color') ||
-			hasFlag('no-colors') ||
-			hasFlag('color=false') ||
-			hasFlag('color=never')) {
-			forceColor = 0;
-		} else if (hasFlag('color') ||
-			hasFlag('colors') ||
-			hasFlag('color=true') ||
-			hasFlag('color=always')) {
-			forceColor = 1;
-		}
-
-		if ('FORCE_COLOR' in env) {
-			if (env.FORCE_COLOR === 'true') {
-				forceColor = 1;
-			} else if (env.FORCE_COLOR === 'false') {
-				forceColor = 0;
-			} else {
-				forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
-			}
-		}
-
-		function translateLevel(level) {
-			if (level === 0) {
-				return false;
-			}
-
-			return {
-				level,
-				hasBasic: true,
-				has256: level >= 2,
-				has16m: level >= 3
-			};
-		}
-
-		function supportsColor(haveStream, streamIsTTY) {
-			if (forceColor === 0) {
-				return 0;
-			}
-
-			if (hasFlag('color=16m') ||
-				hasFlag('color=full') ||
-				hasFlag('color=truecolor')) {
-				return 3;
-			}
-
-			if (hasFlag('color=256')) {
-				return 2;
-			}
-
-			if (haveStream && !streamIsTTY && forceColor === undefined) {
-				return 0;
-			}
-
-			const min = forceColor || 0;
-
-			if (env.TERM === 'dumb') {
-				return min;
-			}
-
-			if (browser$1$1.platform === 'win32') {
-				// Windows 10 build 10586 is the first Windows release that supports 256 colors.
-				// Windows 10 build 14931 is the first release that supports 16m/TrueColor.
-				const osRelease = os.release().split('.');
-				if (
-					Number(osRelease[0]) >= 10 &&
-					Number(osRelease[2]) >= 10586
-				) {
-					return Number(osRelease[2]) >= 14931 ? 3 : 2;
-				}
-
-				return 1;
-			}
-
-			if ('CI' in env) {
-				if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'GITHUB_ACTIONS', 'BUILDKITE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
-					return 1;
-				}
-
-				return min;
-			}
-
-			if ('TEAMCITY_VERSION' in env) {
-				return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
-			}
-
-			if (env.COLORTERM === 'truecolor') {
-				return 3;
-			}
-
-			if ('TERM_PROGRAM' in env) {
-				const version = parseInt((env.TERM_PROGRAM_VERSION || '').split('.')[0], 10);
-
-				switch (env.TERM_PROGRAM) {
-					case 'iTerm.app':
-						return version >= 3 ? 3 : 2;
-					case 'Apple_Terminal':
-						return 2;
-					// No default
-				}
-			}
-
-			if (/-256(color)?$/i.test(env.TERM)) {
-				return 2;
-			}
-
-			if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
-				return 1;
-			}
-
-			if ('COLORTERM' in env) {
-				return 1;
-			}
-
-			return min;
-		}
-
-		function getSupportLevel(stream) {
-			const level = supportsColor(stream, stream && stream.isTTY);
-			return translateLevel(level);
-		}
-
-		supportsColor_1 = {
-			supportsColor: getSupportLevel,
-			stdout: translateLevel(supportsColor(true, tty.isatty(1))),
-			stderr: translateLevel(supportsColor(true, tty.isatty(2)))
-		};
-		return supportsColor_1;
-	}
-
 	var hasRequiredNode;
 
 	function requireNode () {
 		if (hasRequiredNode) return node.exports;
 		hasRequiredNode = 1;
 		(function (module, exports) {
-			const tty = require$$0$1;
+			const tty = require$$0;
 			const util = require$$1;
 
 			/**
@@ -4055,7 +3745,7 @@
 			try {
 				// Optional dependency (as in, doesn't need to be installed, NOT like optionalDependencies in package.json)
 				// eslint-disable-next-line import/no-extraneous-dependencies
-				const supportsColor = requireSupportsColor();
+				const supportsColor = require('supports-color');
 
 				if (supportsColor && (supportsColor.stderr || supportsColor).level >= 2) {
 					exports.colors = [
