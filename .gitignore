@@ -2,6 +2,10 @@ linter.js
 linter.min.js
 linter.mjs
 linter.cjs
+use-at-your-own-risk.js
+use-at-your-own-risk.min.js
+use-at-your-own-risk.mjs
+use-at-your-own-risk.cjs
 example/bundle.js
 .npmrc
 

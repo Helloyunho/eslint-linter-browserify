@@ -22,7 +22,16 @@
       "default": "./linter.cjs"
     },
     "./linter.js": "./linter.js",
-    "./linter.min.js": "./linter.min.js"
+    "./linter.min.js": "./linter.min.js",
+    "./use-at-your-own-risk": {
+      "import": {
+        "types": "./use-at-your-own-risk.d.ts",
+        "default": "./use-at-your-own-risk.mjs"
+      },
+      "default": "./use-at-your-own-risk.cjs"
+    },
+    "./use-at-your-own-risk.js": "./use-at-your-own-risk.js",
+    "./use-at-your-own-risk.min.js": "./use-at-your-own-risk.min.js"
   },
   "repository": {
     "type": "git",
