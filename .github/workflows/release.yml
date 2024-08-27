@@ -30,5 +30,6 @@ jobs:
           author_email: github-actions[bot]@users.noreply.github.com
           message: 'chore: release'
           tag: v${{ inputs.version }}
+          add: "['linter.*', 'use-at-your-own-risk.*']"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
